@@ -1,0 +1,126 @@
+# Copyright (C) 2017 Maurice Frank
+# This file is distributed under the same license as the PACKAGE package.
+# Maurice Frank <maurice.frank@posteo.de>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-14 16:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:14
+msgid "The unit to measure this food in, e.g. kg or L"
+msgstr "Die Einheit in der dieses Produkt gemessen wird."
+
+#: models.py:18
+msgid "The price per unit."
+msgstr "Der Preis per Einheit."
+
+#: models.py:21
+msgid "product"
+msgstr "produkt"
+
+#: models.py:22
+msgid "products"
+msgstr "produkte"
+
+#: models.py:25
+#, python-brace-format
+msgid "{n} costing {p} per {u}"
+msgstr "{n} zum Preis von {p} per {u}"
+
+#: models.py:34
+msgid "depot"
+msgstr "depot"
+
+#: models.py:35
+msgid "depots"
+msgstr "depots"
+
+#: models.py:38
+#, python-brace-format
+msgid "{n} at {l}"
+msgstr "{n} in {l}"
+
+#: models.py:42
+msgid "Make a paying member"
+msgstr "Mache zu zahlendem Mitlied."
+
+#: models.py:43
+msgid "Make a Supervisor"
+msgstr "Mache zu Depotverwalter."
+
+#: models.py:51
+msgid "Containing the JSON array of this users gained potentials"
+msgstr "Enthält einen JSON-Array der Potentiale dieses Mitglieds."
+
+#: models.py:56
+msgid "user"
+msgstr "mitglied"
+
+#: models.py:57
+msgid "users"
+msgstr "mitglieder"
+
+#: models.py:61
+#, python-brace-format
+msgid "{fn} {ln}"
+msgstr "{fn} {ln}"
+
+#: models.py:63
+#, python-brace-format
+msgid "{fn} {ln}({dn})"
+msgstr "{fn} {ln}({dn})"
+
+#: models.py:70
+msgid "A Member has to have an depot."
+msgstr "Ein Mitglied muss ein Depot haben."
+
+#: models.py:72
+msgid "A Member has to have an weekly basket."
+msgstr "Ein Mitglied muss einen wöchentlichen Korb haben."
+
+#: models.py:82
+msgid "portion"
+msgstr "portion"
+
+#: models.py:83
+msgid "portions"
+msgstr "portionen"
+
+#: models.py:86
+#, python-brace-format
+msgid "{q}{u} of {n}"
+msgstr "{q}{u} von {n}"
+
+#: models.py:95
+msgid "weekly basket"
+msgstr "Wöchentlicher Korb"
+
+#: models.py:96
+msgid "weekly baskets"
+msgstr "Wöchentliche Körbe"
+
+#: models.py:99
+#, python-brace-format
+msgid "{n}"
+msgstr "{n}"
+
+#: validators.py:11
+#, python-format
+msgid "%(value)s is not a valid json."
+msgstr ""
+
+#: validators.py:18
+#, python-format
+msgid "%(value)s contains a wrong portion"
+msgstr ""
