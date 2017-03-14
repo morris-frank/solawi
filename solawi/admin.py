@@ -2,8 +2,13 @@ from django.contrib import admin
 from .models import Depot, Product, User, WeeklyBasket, Portion
 
 
+class PortionInline(admin.TabularInline):
+    model = Portion
+    extra = 1
+
+
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    inlines = [PortionInline]
 
 
 class DepotAdmin(admin.ModelAdmin):
@@ -14,10 +19,6 @@ class WeeklyBasketAdmin(admin.ModelAdmin):
     pass
 
 
-class PortionAdmin(admin.ModelAdmin):
-    pass
-
-
 class UserAdmin(admin.ModelAdmin):
     pass
 
@@ -25,5 +26,4 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Depot, DepotAdmin)
 admin.site.register(WeeklyBasket, WeeklyBasketAdmin)
-admin.site.register(Portion, PortionAdmin)
 admin.site.register(User, UserAdmin)

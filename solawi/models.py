@@ -39,8 +39,8 @@ class Depot(models.Model):
 
 
 class User(AbstractUser):
-    isMember = models.BooleanField(_('Make a paying member'), default=True)
-    isSupervisor = models.BooleanField(_('Make a Supervisor'), default=False)
+    is_member = models.BooleanField(_('Make a paying member'), default=True)
+    is_supervisor = models.BooleanField(_('Make a depot supervisor'), default=False)
 
     depot = models.ForeignKey('Depot', on_delete=models.CASCADE,
                               related_name='members', blank=True, null=True)
@@ -57,15 +57,20 @@ class User(AbstractUser):
         verbose_name_plural = _('users')
 
     def __str__(self):
-        if self.isMember:
-            return _('{fn} {ln}').format(fn=self.first_name, ln=self.last_name)
+        if self.depot is None:
+            return _('{un}: {fn} {ln}').format(
+                un=self.username,fn=self.first_name, ln=self.last_name)
         else:
-            return _('{fn} {ln}({dn})').format(
-                fn=self.first_name, ln=self.last_name, dn=self.depot.name)
+            return _('{un}: {fn} {ln}({dn})').format(
+                un=self.username, fn=self.first_name, ln=self.last_name,
+                dn=self.depot.name)
 
     def clean(self):
         super().clean()
-        if self.isMember:
+        if self.is_supervisor:
+            if self.depot is None:
+                raise ValidationError(_('A Member has to have an depot.'))
+        if self.is_member:
             if self.depot is None:
                 raise ValidationError(_('A Member has to have an depot.'))
             if self.weeklybasket is None:
@@ -96,4 +101,4 @@ class WeeklyBasket(models.Model):
         verbose_name_plural = _('weekly baskets')
 
     def __str__(self):
-        return _('{n}').format(self.name)
+        return _('{n}').format(n=self.name)

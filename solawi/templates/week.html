@@ -1,0 +1,9 @@
+{% if user %}
+    <ul>
+    {% for portion in user %}
+        <li>{{ portion.food.name }}{{ portion.quantity }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No portions are available.</p>
+{% endif %}

@@ -1,0 +1,20 @@
+{% if food %}
+    {% if portions_list %}
+        <ul>
+            <tr>
+                <th>{% "Quantity" %}</th>
+                <th>{% "Price" %}</th>
+            </tr>
+        {% for portion in portions_list %}
+            <tr>
+                <td>{{ portion.quantity }}{{ food.unit }}</td>
+                <td>{{ portion.quantity|add:food.price }}</td>
+            </tr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No portions are available.</p>
+    {% endif %}
+{% else %}
+    <p>No food given.</p>
+{% endif %}

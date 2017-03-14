@@ -2,12 +2,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Maurice Frank <maurice.frank@posteo.de>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 16:32+0100\n"
+"POT-Creation-Date: 2017-03-14 18:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +26,11 @@ msgstr "Der Preis per Einheit."
 
 #: models.py:21
 msgid "product"
-msgstr "produkt"
+msgstr "Produkt"
 
 #: models.py:22
 msgid "products"
-msgstr "produkte"
+msgstr "Produkte"
 
 #: models.py:25
 #, python-brace-format
@@ -40,11 +39,11 @@ msgstr "{n} zum Preis von {p} per {u}"
 
 #: models.py:34
 msgid "depot"
-msgstr "depot"
+msgstr "Depot"
 
 #: models.py:35
 msgid "depots"
-msgstr "depots"
+msgstr "Depots"
 
 #: models.py:38
 #, python-brace-format
@@ -56,7 +55,9 @@ msgid "Make a paying member"
 msgstr "Mache zu zahlendem Mitlied."
 
 #: models.py:43
-msgid "Make a Supervisor"
+#, fuzzy
+#| msgid "Make a Supervisor"
+msgid "Make a depot supervisor"
 msgstr "Mache zu Depotverwalter."
 
 #: models.py:51
@@ -65,52 +66,54 @@ msgstr "Enthält einen JSON-Array der Potentiale dieses Mitglieds."
 
 #: models.py:56
 msgid "user"
-msgstr "mitglied"
+msgstr "Mitglied"
 
 #: models.py:57
 msgid "users"
-msgstr "mitglieder"
+msgstr "Mitglied"
 
 #: models.py:61
-#, python-brace-format
-msgid "{fn} {ln}"
+#, fuzzy, python-brace-format
+#| msgid "{fn} {ln}"
+msgid "{un}: {fn} {ln}"
 msgstr "{fn} {ln}"
 
-#: models.py:63
-#, python-brace-format
-msgid "{fn} {ln}({dn})"
+#: models.py:64
+#, fuzzy, python-brace-format
+#| msgid "{fn} {ln}({dn})"
+msgid "{un}: {fn} {ln}({dn})"
 msgstr "{fn} {ln}({dn})"
 
-#: models.py:70
+#: models.py:72 models.py:75
 msgid "A Member has to have an depot."
 msgstr "Ein Mitglied muss ein Depot haben."
 
-#: models.py:72
+#: models.py:77
 msgid "A Member has to have an weekly basket."
 msgstr "Ein Mitglied muss einen wöchentlichen Korb haben."
 
-#: models.py:82
+#: models.py:87
 msgid "portion"
-msgstr "portion"
+msgstr "Portion"
 
-#: models.py:83
+#: models.py:88
 msgid "portions"
-msgstr "portionen"
+msgstr "Portionen"
 
-#: models.py:86
+#: models.py:91
 #, python-brace-format
 msgid "{q}{u} of {n}"
-msgstr "{q}{u} von {n}"
+msgstr "{q}{u} {n}"
 
-#: models.py:95
+#: models.py:100
 msgid "weekly basket"
 msgstr "Wöchentlicher Korb"
 
-#: models.py:96
+#: models.py:101
 msgid "weekly baskets"
 msgstr "Wöchentliche Körbe"
 
-#: models.py:99
+#: models.py:104
 #, python-brace-format
 msgid "{n}"
 msgstr "{n}"
