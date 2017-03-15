@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user %}
+    <header>
+    <ul>
+        <li>{{ user.first_name }} {{ user.last_name }}</li>
+        <li><em>({{ user.username }})</em></li>
+        <li>Week: {% now 'W' %}</li>
+        <li>Acount: {{ user.account }}</li>
+    </ul>
+    </header>
+    {% endif %}
+
+    {% block content_user %}
+    {% endblock %}
+{% endblock %}

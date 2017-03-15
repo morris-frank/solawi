@@ -1,12 +1,15 @@
+import datetime
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core import validators
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .validators import portion_account_validate
+from solawi.validators import portion_account_validate
 from django.utils.translation import ugettext_lazy as _
-
+import json
+from solawi import utils
 
 class Product(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -47,6 +50,8 @@ class User(AbstractUser):
     weeklybasket = models.ForeignKey('WeeklyBasket', on_delete=models.CASCADE,
                                      related_name='members', blank=True,
                                      null=True)
+    assets = models.IntegerField(null=True, blank=True,
+                                 validators=[validators.MinValueValidator(0)])
     account = models.TextField(blank=True, null=True,
                                help_text=_('Containing the JSON array of '
                                            'this users gained potentials'),
@@ -67,6 +72,13 @@ class User(AbstractUser):
 
     def clean(self):
         super().clean()
+        self.assets = 0
+        this_week = utils.date_from_week()
+        valid_days = settings.WEEKS_TO_SAVE_ACCOUNTS * 7
+        for (year, week, asset) in json.loads(self.account):
+            date_delta = (this_week - utils.date_from_week(week, year)).days
+            if date_delta <= valid_days:
+                self.assets += asset
         if self.is_supervisor:
             if self.depot is None:
                 raise ValidationError(_('A Member has to have an depot.'))
@@ -82,6 +94,9 @@ class Portion(models.Model):
     food = models.ForeignKey('Product', on_delete=models.CASCADE,
                              related_name='portions')
     quantity = models.IntegerField()
+    # quantity = models.FloatField(
+    #     validators=[validators.MinValueValidator(0)],
+    #     help_text=_('The quantity of this Portion.'))
 
     class Meta:
         verbose_name = _('portion')

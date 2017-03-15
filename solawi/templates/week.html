@@ -1,9 +1,17 @@
-{% if user %}
-    <ul>
-    {% for portion in user %}
-        <li>{{ portion.food.name }}{{ portion.quantity }}</li>
-    {% endfor %}
-    </ul>
+{% extends 'base_user.html' %}
+
+{% block content_user %}
+{% if user.weeklybasket %}
+    <section>
+        <h2>Weekly Basket</h2>
+        <ul>
+            {% for portion in user.weeklybasket.contents.all %}
+            <li>{{ portion.food.name }} - {{ portion.quantity }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
 {% else %}
     <p>No portions are available.</p>
 {% endif %}
+{% endblock %}

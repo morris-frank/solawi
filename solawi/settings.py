@@ -126,3 +126,7 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'solawi/locale'),)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# SoLaWi Settings:
+WEEKS_TO_SAVE_ACCOUNTS = 10
