@@ -1,5 +1,5 @@
 from django import forms
 
 
-class WeekForm(forms.Form):
+class WeeklyOrderForm(forms.Form):
     pass

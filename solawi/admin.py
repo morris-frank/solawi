@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Depot, Product, User, WeeklyBasket, Portion
+from .models import Depot, Product, User, WeeklyBasket, Portion, OrderBasket
 
 
 class PortionInline(admin.TabularInline):
@@ -23,7 +23,12 @@ class UserAdmin(admin.ModelAdmin):
     pass
 
 
+class OrderBasketAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Depot, DepotAdmin)
 admin.site.register(WeeklyBasket, WeeklyBasketAdmin)
 admin.site.register(User, UserAdmin)
+admin.site.register(OrderBasket, OrderBasketAdmin)

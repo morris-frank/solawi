@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 17:23+0100\n"
+"POT-Creation-Date: 2017-03-16 16:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,107 +16,130 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:17
-msgid "The unit to measure this food in, e.g. kg or L"
-msgstr "Die Einheit in der dieses Produkt gemessen wird."
-
-#: models.py:21
-msgid "The price per unit."
-msgstr "Der Preis per Einheit."
-
-#: models.py:24
-msgid "product"
-msgstr "Produkt"
-
-#: models.py:25
-msgid "products"
-msgstr "Produkte"
-
-#: models.py:28
-#, python-brace-format
-msgid "{n} costing {p} per {u}"
-msgstr "{n} zum Preis von {p} per {u}"
-
-#: models.py:37
-msgid "depot"
-msgstr "Depot"
-
-#: models.py:38
-msgid "depots"
-msgstr "Depots"
-
-#: models.py:41
-#, python-brace-format
-msgid "{n} at {l}"
-msgstr "{n} in {l}"
-
-#: models.py:45
+#: models.py:16
 msgid "Make a paying member"
 msgstr "Mache zu zahlendem Mitlied."
 
-#: models.py:46
+#: models.py:17
 #, fuzzy
 #| msgid "Make a Supervisor"
 msgid "Make a depot supervisor"
 msgstr "Mache zu Depotverwalter."
 
-#: models.py:56
+#: models.py:27
 msgid "Containing the JSON array of this users gained potentials"
 msgstr "Enthält einen JSON-Array der Potentiale dieses Mitglieds."
 
-#: models.py:61
+#: models.py:32
 msgid "user"
 msgstr "Mitglied"
 
-#: models.py:62
+#: models.py:33
 msgid "users"
 msgstr "Mitglied"
 
-#: models.py:66
-#, fuzzy, python-brace-format
-#| msgid "{fn} {ln}"
-msgid "{un}: {fn} {ln}"
-msgstr "{fn} {ln}"
+#: models.py:41
+#, python-brace-format
+msgid "{name}"
+msgstr "{name}"
 
-#: models.py:69
-#, fuzzy, python-brace-format
-#| msgid "{fn} {ln}({dn})"
-msgid "{un}: {fn} {ln}({dn})"
-msgstr "{fn} {ln}({dn})"
+#: models.py:43
+#, python-brace-format
+msgid "{name} ({depot})"
+msgstr "{name} ({depot})"
 
-#: models.py:84 models.py:87
+#: models.py:50 models.py:53
 msgid "A Member has to have an depot."
 msgstr "Ein Mitglied muss ein Depot haben."
 
-#: models.py:89
+#: models.py:55
 msgid "A Member has to have an weekly basket."
 msgstr "Ein Mitglied muss einen wöchentlichen Korb haben."
 
-#: models.py:102
+#: models.py:73
+msgid "The unit to measure this food in, e.g. kg or L"
+msgstr "Die Einheit in der dieses Produkt gemessen wird."
+
+#: models.py:77
+msgid "The price per unit."
+msgstr "Der Preis per Einheit."
+
+#: models.py:80
+msgid "product"
+msgstr "Produkt"
+
+#: models.py:81
+msgid "products"
+msgstr "Produkte"
+
+#: models.py:93
+#, fuzzy
+#| msgid "The price per unit."
+msgid "The price of this Portion."
+msgstr "Der Preis per Einheit."
+
+#: models.py:100
 msgid "portion"
 msgstr "Portion"
 
-#: models.py:103
+#: models.py:101
 msgid "portions"
 msgstr "Portionen"
 
-#: models.py:106
-#, python-brace-format
-msgid "{q}{u} of {n}"
-msgstr "{q}{u} {n}"
+#: models.py:104
+#, fuzzy, python-brace-format
+#| msgid "{q}{u} of {n}"
+msgid "{quantity}{unit} of {food}"
+msgstr "{quantity}{unit} {food}"
 
-#: models.py:115
+#: models.py:120
+msgid "depot"
+msgstr "Depot"
+
+#: models.py:121
+msgid "depots"
+msgstr "Depots"
+
+#: models.py:124
+#, fuzzy, python-brace-format
+#| msgid "{n} at {l}"
+msgid "{name} at {location}"
+msgstr "{n} in {l}"
+
+#: models.py:133
 msgid "weekly basket"
 msgstr "Wöchentlicher Korb"
 
-#: models.py:116
+#: models.py:134
 msgid "weekly baskets"
 msgstr "Wöchentliche Körbe"
 
-#: models.py:119
+#: models.py:138
 #, python-brace-format
-msgid "{n}"
-msgstr "{n}"
+msgid "{name}: {contents}"
+msgstr "{name}: {contents}"
+
+#: models.py:149
+#, fuzzy
+#| msgid "weekly basket"
+msgid "order basket"
+msgstr "Wöchentlicher Korb"
+
+#: models.py:150
+#, fuzzy
+#| msgid "weekly baskets"
+msgid "order baskets"
+msgstr "Wöchentliche Körbe"
+
+#: models.py:158
+msgid "There is already an order for this week. Update that instead."
+msgstr ""
+"Es gibt bereits einen Korb für diese Woche. Verändere stattdessen jenen."
+
+#: models.py:170
+#, python-brace-format
+msgid "{year}-{week} by {user}: {contents}"
+msgstr "{year}-{week} durch {user}: {contents}"
 
 #: validators.py:12
 #, fuzzy, python-brace-format
@@ -147,3 +170,19 @@ msgstr "{w} ist keine Wochennummer."
 #, python-brace-format
 msgid "{v} is not a valid asset"
 msgstr "{v} ist kein valides Vermögen."
+
+#~ msgid "{n} costing {p} per {u}"
+#~ msgstr "{n} zum Preis von {p} per {u}"
+
+#, fuzzy
+#~| msgid "{fn} {ln}"
+#~ msgid "{un}: {fn} {ln}"
+#~ msgstr "{fn} {ln}"
+
+#, fuzzy
+#~| msgid "{fn} {ln}({dn})"
+#~ msgid "{un}: {fn} {ln}({dn})"
+#~ msgstr "{fn} {ln}({dn})"
+
+#~ msgid "{n}"
+#~ msgstr "{n}"
