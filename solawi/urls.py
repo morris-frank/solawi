@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^woche/$', views.woche),
     url(r'^woche/(?P<year>[0-9]{4})/$', views.woche),
-    url(r'^woche/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.woche),
+    url(r'^woche/(?P<year>[0-9]{4})/(?P<week>[0-9]{1,2})/$', views.woche),
 ]

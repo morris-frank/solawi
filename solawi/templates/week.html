@@ -15,6 +15,21 @@
         <p>No portions are available.</p>
     {% endif %}
 
+    <section>
+        <h2>Ordererd</h2>
+    {% if orders %}
+            <ul>
+                {% for portion in orders.contents.all %}
+                <li>{{ portion.food.name }} - {{ portion.quantity }} - {{ portion.price }}</li>
+                {% endfor %}
+            </ul>
+    {% else %}
+        <span>No orders for this week.</span>
+    {% endif %}
+    <a href="/woche/{{ controls.prev_week|date:"Y" }}/{{ controls.prev_week|date:"W" }}">Previous week</a>
+    <a href="/woche/{{ controls.next_week|date:"Y" }}/{{ controls.next_week|date:"W" }}">Next week</a>
+    </section>
+
     {% if portions_list %}
         <section>
             <h2>Order stuff</h2>

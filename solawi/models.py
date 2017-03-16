@@ -61,7 +61,7 @@ class User(AbstractUser):
             this_week = utils.date_from_week()
             valid_days = settings.WEEKS_TO_SAVE_ACCOUNTS * 7
             for (year, week, asset) in json.loads(self.account):
-                date_delta = (this_week - utils.date_from_week(week, year)).days
+                date_delta = (this_week - utils.date_from_week(year, week)).days
                 if date_delta <= valid_days:
                     self.assets += asset
         super().save(*args, **kwargs)
@@ -152,7 +152,7 @@ class OrderBasket(models.Model):
 
     def clean(self):
         super().clean()
-        week = self.week - datetime.timedelta(self.week.weekday())
+        week = utils.get_moday(self.monday)
         existingOrders = OrderBasket.objects.filter(user=self.user, week=week)
         if len(existingOrders) > 0:
             raise ValidationError(_('There is already an order for this week.'
@@ -160,7 +160,7 @@ class OrderBasket(models.Model):
 
     def save(self, *args, **kwargs):
         # Set every date on Monday!
-        self.week -= datetime.timedelta(self.week.weekday())
+        self.week = utils.get_moday(self.week)
         super().save(*args, **kwargs)
 
     def __str__(self):
