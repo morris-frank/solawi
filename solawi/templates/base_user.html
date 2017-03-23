@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if user %}
+    {% if view.user %}
         <header>
         <ul>
-            <li>{{ user.first_name }} {{ user.last_name }}</li>
-            <li><em>({{ user.username }})</em></li>
-            <li>Week: {% now 'W' %}</li>
-            <li>Assets: {{ user.assets }}</li>
+            <li>{{ view.user.first_name }} {{ view.user.last_name }}</li>
+            <li><em>({{ view.user.username }})</em></li>
+            <li>Assets: {{ view.user.assets }}</li>
         </ul>
         </header>
     {% endif %}

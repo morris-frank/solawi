@@ -1,13 +1,17 @@
 {% extends 'base_user.html' %}
 
 {% block content_user %}
+    <p>
+        <span>{{ view.week_start|date:"D d F Y" }}</span>
+        <span>{{ view.week_end|date:"D d F Y" }}</span>
+    </p>
 
-    {% if weekly_basket_form %}
+    {% if view.weekly_basket_form %}
         <section>
             <h2>Weekly Basket</h2>
             <form action="/your-name/" method="post">
                 {% csrf_token %}
-                {{ weekly_basket_form }}
+                {{ view.weekly_basket_form }}
                 <input type="submit" value="Submit" />
             </form>
         </section>
@@ -15,32 +19,32 @@
 
     <section>
         <h2>Ordererd</h2>
-    {% if orders %}
+    {% if view.orders %}
             <ul>
-                {% for portion in orders.contents.all %}
+                {% for portion in view.orders.contents.all %}
                 <li>{{ portion.food.name }} - {{ portion.quantity }} - {{ portion.price }}</li>
                 {% endfor %}
             </ul>
     {% else %}
         <span>No orders for this week.</span>
     {% endif %}
-    <a href="/woche/{{ controls.prev_week|date:"Y" }}/{{ controls.prev_week|date:"W" }}">Previous week</a>
-    <a href="/woche/{{ controls.next_week|date:"Y" }}/{{ controls.next_week|date:"W" }}">Next week</a>
+    <a href="{{ view.controls.prev_week }}">Previous week</a>
+    <a href="{{ view.controls.next_week }}">Next week</a>
 
-    {% if order_basket_form %}
+    {% if view.order_basket_form %}
         <form action="/your-name/" method="post">
             {% csrf_token %}
-            {{ order_basket_form }}
+            {{ view.order_basket_form }}
             <input type="submit" value="Submit" />
         </form>
     {% endif %}
     </section>
 
-    {% if portions_list %}
+    {% if view.portions_list %}
         <section>
             <h2>Order stuff</h2>
             <ul>
-                {% for portion in portions_list %}
+                {% for portion in view.portions_list %}
                 <li>{{ portion.food.name }} - {{ portion.quantity }} - {{ portion.price }}</li>
                 {% endfor %}
             </ul>
