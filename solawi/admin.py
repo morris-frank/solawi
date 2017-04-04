@@ -3,27 +3,33 @@ from .models import Depot, Product, User, WeeklyBasket, Portion, OrderBasket
 
 
 class PortionInline(admin.TabularInline):
+    ''' '''
     model = Portion
     extra = 1
 
 
 class ProductAdmin(admin.ModelAdmin):
+    ''' '''
     inlines = [PortionInline]
 
 
 class DepotAdmin(admin.ModelAdmin):
+    ''' '''
     pass
 
 
 class WeeklyBasketAdmin(admin.ModelAdmin):
+    ''' '''
     pass
 
 
 class UserAdmin(admin.ModelAdmin):
+    ''' '''
     pass
 
 
 class OrderBasketAdmin(admin.ModelAdmin):
+    ''' '''
     pass
 
 

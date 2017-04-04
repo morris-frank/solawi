@@ -13,8 +13,10 @@ from solawi import utils
 
 
 class User(AbstractUser):
+    ''' '''
     is_member = models.BooleanField(_('Make a paying member'), default=True)
-    is_supervisor = models.BooleanField(_('Make a depot supervisor'), default=False)
+    is_supervisor = models.BooleanField(_('Make a depot supervisor'),
+                                        default=False)
 
     depot = models.ForeignKey('Depot', on_delete=models.CASCADE,
                               related_name='members', blank=True, null=True)
@@ -29,6 +31,7 @@ class User(AbstractUser):
                                validators=[portion_account_validate])
 
     class Meta:
+        ''' '''
         verbose_name = _('user')
         verbose_name_plural = _('users')
 
@@ -44,6 +47,7 @@ class User(AbstractUser):
                                                 depot=self.depot.name)
 
     def clean(self):
+        ''' '''
         super().clean()
         if self.is_supervisor:
             if self.depot is None:
@@ -56,18 +60,28 @@ class User(AbstractUser):
                                         'weekly basket.'))
 
     def save(self, *args, **kwargs):
+        '''
+
+        Args:
+          *args:
+          **kwargs:
+
+        Returns:
+
+        '''
         if self.account:
             self.assets = 0
             this_week = utils.date_from_week()
             valid_days = settings.WEEKS_TO_SAVE_ACCOUNTS * 7
             for (year, week, asset) in json.loads(self.account):
-                date_delta = (this_week - utils.date_from_week(year, week)).days
-                if date_delta <= valid_days:
+                date_delta = this_week - utils.date_from_week(year, week)
+                if date_delta.days <= valid_days:
                     self.assets += asset
         super().save(*args, **kwargs)
 
 
 class Product(models.Model):
+    ''' '''
     name = models.CharField(max_length=30, unique=True)
     unit = models.CharField(max_length=15,
                             help_text=_('The unit to measure this food in, '
@@ -77,6 +91,7 @@ class Product(models.Model):
         help_text=_('The price per unit.'))
 
     class Meta:
+        ''' '''
         verbose_name = _('product')
         verbose_name_plural = _('products')
 
@@ -85,6 +100,7 @@ class Product(models.Model):
 
 
 class Portion(models.Model):
+    ''' '''
     food = models.ForeignKey('Product', on_delete=models.CASCADE,
                              related_name='portions')
     quantity = models.IntegerField()
@@ -97,6 +113,7 @@ class Portion(models.Model):
     #     help_text=_('The quantity of this Portion.'))
 
     class Meta:
+        ''' '''
         verbose_name = _('portion')
         verbose_name_plural = _('portions')
 
@@ -105,18 +122,30 @@ class Portion(models.Model):
             quantity=self.quantity, unit=self.food.unit, food=self.food)
 
     def get_price(self):
+        ''' '''
         return self.quantity * self.food.price
 
     def save(self, *args, **kwargs):
+        '''
+
+        Args:
+          *args:
+          **kwargs:
+
+        Returns:
+
+        '''
         self.price = self.get_price()
         super().save(*args, **kwargs)
 
 
 class Depot(models.Model):
+    ''' '''
     name = models.CharField(max_length=30, unique=True)
     location = models.CharField(max_length=30)
 
     class Meta:
+        ''' '''
         verbose_name = _('depot')
         verbose_name_plural = _('depots')
 
@@ -126,10 +155,12 @@ class Depot(models.Model):
 
 
 class WeeklyBasket(models.Model):
+    ''' '''
     name = models.CharField(max_length=50)
     contents = models.ManyToManyField('Portion')
 
     class Meta:
+        ''' '''
         verbose_name = _('weekly basket')
         verbose_name_plural = _('weekly baskets')
 
@@ -140,25 +171,35 @@ class WeeklyBasket(models.Model):
 
 
 class OrderBasket(models.Model):
+    ''' '''
     week = models.DateField()
     user = models.ForeignKey('User', on_delete=models.CASCADE,
                              related_name='orders')
     contents = models.ManyToManyField('Portion')
+    edited_weekly_basket = models.BooleanField(
+        _('Has edited the weekly basket for this week'), default=False)
 
     class Meta:
+        ''' '''
         verbose_name = _('order basket')
         verbose_name_plural = _('order baskets')
         unique_together = ('week', 'user')
 
     def clean(self):
+        ''' '''
         super().clean()
-        week = utils.get_moday(self.monday)
-        existingOrders = OrderBasket.objects.filter(user=self.user, week=week)
-        if len(existingOrders) > 0:
-            raise ValidationError(_('There is already an order for this week.'
-                                    ' Update that instead.'))
+        self.week = utils.get_moday(self.week)
 
     def save(self, *args, **kwargs):
+        '''
+
+        Args:
+          *args:
+          **kwargs:
+
+        Returns:
+
+        '''
         # Set every date on Monday!
         self.week = utils.get_moday(self.week)
         super().save(*args, **kwargs)

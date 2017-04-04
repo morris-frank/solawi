@@ -1,0 +1,24 @@
+{% extends 'base_user.html' %}
+
+{% block content_user %}
+
+    {% if view.depot %}
+        <table>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Assets</th>
+                <th>Is supervisor..</th>
+            </tr>
+        {% for member in view.members %}
+            <tr>
+                <td>{{ member.first_name }}</td>
+                <td>{{ member.last_name }}</td>
+                <td>{{ member.assets }}</td>
+                <td>{{ member.is_supervisor }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+{% endblock %}

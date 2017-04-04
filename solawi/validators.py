@@ -5,6 +5,14 @@ import json
 
 
 def portion_account_validate(value):
+    '''
+
+    Args:
+      value: 
+
+    Returns:
+
+    '''
     try:
         j = json.loads(value)
     except json.JSONDecodeError:

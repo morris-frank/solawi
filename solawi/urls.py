@@ -21,7 +21,8 @@ from . import views
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^woche/$', views.Woche.as_view()),
-    url(r'^woche/(?P<year>[0-9]{4})/$', views.Woche.as_view()),
-    url(r'^woche/(?P<year>[0-9]{4})/(?P<week>[0-9]{1,2})/$', views.Woche.as_view()),
+    url(r'^depot/(?P<depot_id>[0-9]+)/$', views.DepotView.as_view()),
+    url(r'^woche/$', views.WeekView.as_view()),
+    url(r'^woche/(?P<year>[0-9]{4})/$', views.WeekView.as_view()),
+    url(r'^woche/(?P<year>[0-9]{4})/(?P<week>[0-9]{1,2})/$', views.WeekView.as_view()),
 ]

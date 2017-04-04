@@ -7,6 +7,7 @@
             <li>{{ view.user.first_name }} {{ view.user.last_name }}</li>
             <li><em>({{ view.user.username }})</em></li>
             <li>Assets: {{ view.user.assets }}</li>
+            <li>Depot: <a href="{{ view.controls.depot }}">{{ view.user.depot.name }}</a></li>
         </ul>
         </header>
     {% endif %}

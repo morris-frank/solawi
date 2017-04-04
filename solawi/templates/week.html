@@ -9,7 +9,7 @@
     {% if view.weekly_basket_form %}
         <section>
             <h2>Weekly Basket</h2>
-            <form action="/your-name/" method="post">
+            <form action="{{ view.request.path }}" method="post">
                 {% csrf_token %}
                 {{ view.weekly_basket_form }}
                 <input type="submit" value="Submit" />
@@ -32,7 +32,7 @@
     <a href="{{ view.controls.next_week }}">Next week</a>
 
     {% if view.order_basket_form %}
-        <form action="/your-name/" method="post">
+        <form action="{{ view.request.path }}" method="post">
             {% csrf_token %}
             {{ view.order_basket_form }}
             <input type="submit" value="Submit" />
