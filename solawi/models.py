@@ -23,9 +23,9 @@ class User(AbstractUser):
     weeklybasket = models.ForeignKey('WeeklyBasket', on_delete=models.CASCADE,
                                      related_name='members', blank=True,
                                      null=True)
-    assets = models.IntegerField(null=True, blank=True, default='',
+    assets = models.IntegerField(null=True, blank=True, default=0,
                                  validators=[validators.MinValueValidator(0)])
-    account = models.TextField(null=True, blank=True, default=0,
+    account = models.TextField(null=True, blank=True, default='[]',
                                help_text=_('Containing the JSON array of '
                                            'this users gained potentials'),
                                validators=[portion_account_validate])
@@ -170,12 +170,17 @@ class WeeklyBasket(models.Model):
                                               contents=cstr)
 
 
+class OrderBasketProduct(models.Model):
+    portion = models.ForeignKey('Portion')
+    basket = models.ForeignKey('OrderBasket')
+    count = models.IntegerField()
+
 class OrderBasket(models.Model):
     ''' '''
     week = models.DateField()
     user = models.ForeignKey('User', on_delete=models.CASCADE,
                              related_name='orders')
-    contents = models.ManyToManyField('Portion')
+    contents = models.ManyToManyField('Portion', through='OrderBasketProduct')
     edited_weekly_basket = models.BooleanField(
         _('Has edited the weekly basket for this week'), default=False)
 
