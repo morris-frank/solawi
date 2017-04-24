@@ -173,7 +173,14 @@ class WeeklyBasket(models.Model):
 class OrderBasketProduct(models.Model):
     portion = models.ForeignKey('Portion')
     basket = models.ForeignKey('OrderBasket')
-    count = models.IntegerField()
+    count = models.IntegerField(default=0)
+
+    def __str__(self):
+        week = self.basket.week.strftime('%W')
+        year = self.basket.week.year
+        return '{count} of {portion} for {user} in {year}-{week}'.format(
+            count=self.count, portion=self.portion, user=self.basket.user,
+            year=year, week=week)
 
 class OrderBasket(models.Model):
     ''' '''

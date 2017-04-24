@@ -12,6 +12,7 @@ from solawi import forms
 from solawi.models import (
     Depot,
     OrderBasket,
+    OrderBasketProduct,
     Portion,
     Product,
     User,
@@ -57,16 +58,29 @@ class WeekView(BaseMemberView):
 
         '''
         weekly_basket_form = forms.WeeklyBasketForm(
-            request.POST, orderbasket=self.orders,
+            data=request.POST, orderbasket=self.orders,
             weeklybasket=self.user.weeklybasket)
         if weekly_basket_form.is_valid():
-            print('bin valide du')
-            weekly_basket_form.save()
-        order_basket_form = forms.OrderBasketFrom(
+            print(weekly_basket_form.__dict__)
+            # weekly_basket_form.save()
+
+        order_basket_form = forms.OrderBasketForm(
             request.POST, instance=self.orders)
         if order_basket_form.is_valid():
             print('is valide')
-            order_basket_form.save()
+            # order_basket_form.save()
+            order_basket_mod = order_basket_form.save(commit=False)
+            order_basket_mod.save()
+            # OrderBasketProduct.objects.filter(basket=order_basket_mod).delete()
+            for portion in order_basket_form.cleaned_data.get('contents'):
+                order_basket_product = OrderBasketProduct.objects.filter(basket=order_basket_mod)
+                if order_basket_product:
+                    order_basket_product = order_basket_product[0]
+                    order_basket_product.count += 1
+                else:
+                    order_basket_product = OrderBasketProduct(
+                        basket=order_basket_mod, portion=portion, count=1)
+                order_basket_product.save()
         return self.get(request, *args, **kwargs)
 
     @view_property
@@ -108,7 +122,7 @@ class WeekView(BaseMemberView):
     @view_property
     def order_basket_form(self):
         ''' '''
-        return forms.OrderBasketFrom(instance=self.orders)
+        return forms.OrderBasketForm(instance=self.orders)
 
     @view_property
     def controls(self):
